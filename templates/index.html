@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>TVMaze | Dizi Arama</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(120deg, #141e30, #243b55);
+            color: #fff;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: #1f2a40;
+            padding: 30px;
+            border-radius: 12px;
+            width: 500px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #f5c518;
+        }
+
+        form {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+        }
+
+        button {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 8px;
+            background: #f5c518;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #e4b207;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background: #2d3b55;
+            margin-bottom: 10px;
+            padding: 12px;
+            border-radius: 8px;
+        }
+
+        .genre {
+            font-size: 0.85em;
+            color: #bbb;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 0.8em;
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🎬 TVMaze Dizi Arama</h1>
+
+    <form method="get" action="/search">
+        <input type="text" name="q" placeholder="Dizi adı girin..." required>
+        <button type="submit">Ara</button>
+    </form>
+
+    {% if results %}
+        <ul>
+            {% for item in results %}
+                <li>
+                    <strong>{{ item.show.name }}</strong><br>
+                    {% if item.show.genres %}
+                        <span class="genre">{{ item.show.genres | join(", ") }}</span>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <footer>
+        Stateless TVMaze API • Flask & Docker
+    </footer>
+</div>
+
+</body>
+</html>
